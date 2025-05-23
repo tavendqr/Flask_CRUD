@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+
+<div class="con">
+  <div class="container">
+
+    {% if tasks %}
+      <table>
+        <tr><th>Task</th><th>Index</th><th>Action</th></tr>
+        {% for task in tasks %}
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{{ task.id }}</td>
+          <td>
+            <a href="{{ url_for('delete', id=task.id) }}">Delete</a>
+            <a href="{{ url_for('update', id=task.id) }}">Update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <h1>Add Content</h1>
+    {% endif %}
+
+    <form action="/" method="POST">
+      <input type="text" name="content" id="content">
+      <input type="submit" value="Add Task">
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
